@@ -1,0 +1,9 @@
+# Lib examples
+pdfjsNodeExample.js
+writexlsx.html
+
+# Misc
+*.xlsx
+
+# Node
+node_modules

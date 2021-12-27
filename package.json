@@ -1,0 +1,15 @@
+{
+  "name": "police-book",
+  "version": "1.0.0",
+  "description": "police book",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "burrich",
+  "license": "ISC",
+  "dependencies": {
+    "pdfjs-dist": "^2.12.313",
+    "xlsx": "^0.17.4"
+  }
+}
