@@ -1,6 +1,10 @@
+require('dotenv').config();
+const process = require('process');
 const { readdirSync } = require('fs');
 const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
 const XLSX = require('xlsx');
+
+// TODO: % instead of all "pdf/18/09/DOC_RECEP_DECL_ACHAT_DESTR_CE-404-RA_VF37EKFXE32078436.pdf read, data extracted"... (debug flag ?) => Session Buddy
 
 function readPDF(pdfPath) {
   const loadingTask = pdfjsLib.getDocument(pdfPath);
@@ -146,7 +150,7 @@ function writeXLSX(filename, data) {
 }
 
 function yearPDFsToXLSX(year) {
-  const yearPath = sivPath + '/' + year;
+  const yearPath = pdfPath + '/' + year;
 
   try {
     const yearPurchases = [];
@@ -192,8 +196,8 @@ function yearPDFsToXLSX(year) {
       });
   
       // Write
-      const policeBookFilename = year + '.xlsx';
-      writeXLSX(policeBookFilename, yearPurchases); 
+      const policeBookPath = xlsxPath + '/' + year + '.xlsx';
+      writeXLSX(policeBookPath, yearPurchases); 
     });
   } catch (err) {
     console.log(err);
@@ -201,10 +205,16 @@ function yearPDFsToXLSX(year) {
 };
 
 // MAIN
-const sivPath = 'C:/Users/nidet/Google Drive/OAD/SIV';
+const pdfPath = process.env.PDF_PATH || 'data/pdf';
+const xlsxPath = process.env.XLSX_PATH || 'data';
 let fromNum = 1;
 
 console.log('Init...\n');
-yearPDFsToXLSX('19');
-yearPDFsToXLSX('20');
-yearPDFsToXLSX('21');
+
+// Process all folders
+// TODO: catch errors
+readdirSync(pdfPath).forEach(year => {
+  yearPDFsToXLSX(year);
+});
+
+

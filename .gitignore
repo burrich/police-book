@@ -3,7 +3,11 @@ pdfjsNodeExample.js
 writexlsx.html
 
 # Misc
-*.xlsx
+.env
 
 # Node
 node_modules
+
+# pdf and xlsx files
+*.pdf
+*.xlsx
